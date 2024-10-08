@@ -1,0 +1,132 @@
+/* Barra Lateral Esquerda */
+.left-sidebar {
+    width: 300px;
+    height: 100vh;
+    min-height: 100%;
+    background: url(background.jpg); 
+    color: black; 
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .left-sidebar .logo img {
+    max-width: 80%; /* Ajustado para 80% para evitar overflow */
+    border-radius: 50%;
+  }
+  
+  .left-sidebar .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 30px;
+    width: 100%;
+  }
+  
+  .left-sidebar .sidebar-menu li {
+    text-align: center;
+    margin-bottom: 45px;
+  }
+  
+  .left-sidebar .sidebar-menu li a{
+    color:  black;
+    font-size: larger;
+  }
+
+  .left-sidebar .sidebar-menu li a:hover{
+    color: rgb(191, 191, 191);
+  }
+
+  .left-sidebar .profile-section a{
+    color:  black;
+    font-size: larger;
+  } 
+
+  .left-sidebar .profile-section a:hover{
+    color: rgb(191, 191, 191);
+  } 
+
+  .left-sidebar .profile-section {
+    text-align: center;
+  }
+  
+  .left-sidebar .profile-section img {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .left-sidebar .sidebar-section {
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .left-sidebar .sidebar-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+/* groups */
+
+.main-content {
+    flex: 1; 
+    padding: 50px;
+}
+
+.groups {
+    margin-top: 20px;
+    width: 100%; 
+}
+
+.groups-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.groups ul {
+    list-style: none;
+    padding: 0;
+}
+
+.groups ul li {
+    background-color: white; 
+    border: 1px solid #BAD1E6;   
+    border-radius: 5px;
+    padding: 20px;            
+}
+
+.groups ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.groups ul li:hover {
+    background-color: #D4E4F2;
+}
+
+.groups .create-group {
+    background-color: #BAD1E6;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.groups .create-group:hover {
+    background-color: gainsboro;
+}
+
+ul li:not(#users-not-found, .sidebar-menu > li) {
+  margin-bottom: 10px;
+}
+
+ul li:not(#users-not-found) {
+  transition: transform 0.3s ease;
+}
+
+ul li:hover:not(#users-not-found) {
+  transform: translateX(5px);
+}
+
+

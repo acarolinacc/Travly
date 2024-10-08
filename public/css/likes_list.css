@@ -1,0 +1,329 @@
+/* Container Geral */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/* Barra Lateral Esquerda */
+.left-sidebar {
+    width: 300px;
+    height: 100vh;
+    min-height: 100%;
+    background: url(background.jpg);
+    color: black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.left-sidebar .logo img {
+    max-width: 80%;
+    border-radius: 50%;
+}
+
+.left-sidebar .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 30px;
+    width: 100%;
+}
+
+.left-sidebar .sidebar-menu li {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.left-sidebar .sidebar-menu li a {
+    color: black;
+    font-size: larger;
+}
+
+.left-sidebar .sidebar-menu li a:hover {
+    color: rgb(191, 191, 191);
+}
+
+.left-sidebar .profile-section a {
+    color: black;
+    font-size: larger;
+}
+
+.left-sidebar .profile-section a:hover {
+    color: rgb(191, 191, 191);
+}
+
+.left-sidebar .profile-section {
+    text-align: center;
+}
+
+.left-sidebar .profile-section img {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.left-sidebar .sidebar-section {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.left-sidebar .sidebar-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.conversations-list {
+    list-style: none;
+    padding: 0;
+}
+
+.conversation-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Para distanciar o nome do usuário do avatar */
+    border-bottom: 1px solid #ddd; /* Adiciona uma borda inferior entre as conversas */
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #D4E4F2;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.conversation-details {
+    flex-grow: 1; /* Faz com que o detalhe da conversa ocupe todo o espaço disponível */
+}
+
+.user-name {
+    margin: 0;
+    font-weight: bold; /* Adiciona negrito ao nome do usuário */
+}
+
+.username {
+    margin: 0;
+    color: #777; /* Adiciona uma cor mais leve ao nome de usuário */
+    font-size: smaller; /* Diminui o tamanho da fonte do nome de usuário */
+}
+
+.user-name:hover,
+.username:hover {
+    color: #777;
+    cursor: pointer;
+}
+
+
+/* Adicione esses estilos ao seu arquivo messages_menu.css */
+
+.messages-section {
+    flex: 1;
+    padding: 20px;
+    border-left: 1px solid #ddd; /* Adiciona uma borda à esquerda da seção de mensagens */
+    overflow-y: auto; /* Adiciona uma barra de rolagem se o conteúdo ultrapassar a altura */
+}
+
+.default-message {
+    text-align: center;
+    margin-top: 230px;
+    color: #555; /* Cor do texto padrão */
+}
+
+.default-message p {
+    margin: 10px 0;
+}
+
+/* Barra Lateral Direita */
+.right-sidebar {
+    width: 280px;
+    padding: 20px;
+    background-color: #6084a3;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    border-radius: 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: width 0.3s ease;
+  }
+  
+  #search-users {
+    margin-bottom: 0px;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d4e4f2;
+    color: #000000;
+    font-size: 16px;
+  }
+  
+  #user-profile-link:hover {
+    color: #000000;
+  }
+  #user-username {
+    margin-bottom: 3px;
+  }
+  
+  /* Additional styling for the suggested groups */
+  .suggested-groups ul {
+    padding: 0;
+  }
+  
+  .group-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .group-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .group-details {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Expand group details to full width */
+  }
+  
+  .group-name {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .join-button {
+    background-color: #D4E4F2;
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+  }
+  
+  .join-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Additional styling for the people near you */
+  .people-near-you ul {
+    padding: 0;
+  }
+  
+  .person-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .person-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .person-details {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Expand person details to full width */
+  }
+  
+  .person-name {
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .follow-button {
+    background-color: #D4E4F2;
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+  }
+  
+  .follow-button:hover {
+    background-color: #2980b9;
+  }
+  
+  .see-more-link {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: color 0.3s ease; /* Added transition for smooth color change */
+  }
+  
+  .see-more-link:hover {
+    text-decoration: underline;
+    color: #ffffff; /* Set the color to white on hover */
+  }
+  
+  .suggested-groups,
+  .people-near-you,
+  .trending-hashtags {
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul li:not(#users-not-found, .sidebar-menu > li) {
+    margin-bottom: 5px;
+  }
+  
+  ul li:not(#users-not-found) {
+    transition: transform 0.3s ease;
+  }
+  
+  ul li:hover:not(#users-not-found) {
+    transform: translateX(5px);
+  }
+  
+  .right-sidebar .sidebar-box {
+    margin-bottom: 20px;
+    border: 1px solid #2980b9;
+    padding: 15px;
+    border-radius: 0;
+    background-color: #2980b9;
+    transition: transform 0.3s ease;
+  }
+  
+  .right-sidebar .sidebar-box:hover {
+    transform: scale(1.05);
+  }
+  
+
+  

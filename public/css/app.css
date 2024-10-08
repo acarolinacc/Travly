@@ -1,0 +1,100 @@
+body {
+  background-color: white;
+  color: black;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+}
+
+.white-link {
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #D4E4F2;
+  padding: 1em;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.logo h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-links {
+  margin-left: auto; /* Move os links para a direita */
+}
+
+.nav-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+
+.logo h1 a.white-link {
+  color: white;
+}
+
+.nav-links a:hover {
+  color: #1f1f1f;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info img {
+  width: 30px; /* Ajuste o tamanho conforme necessário */
+  height: 30px; /* Ajuste o tamanho conforme necessário */
+  border-radius: 50%;
+}
+
+.logout-button {
+  margin-left: 10px;
+}
+
+/* Override milligram colors */
+button,
+a.button,
+a.button.button-outline {
+  background-color: #BAD1E6;
+  border-color: #BAD1E6;
+}
+
+a.button.button-outline {
+  color: #BAD1E6;
+}
+
+a {
+  color: white;
+}
+
+/* Input Focus Styles */
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+  border-color: white;
+}

@@ -1,0 +1,180 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="profile-container">
+    <div class="profile-sidebar-header-container">
+        {{-- Left Sidebar --}}
+        @guest
+            <div class="left-sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="{{ route('login') }}">🔐 Login</a></li>
+                    <li><a href="{{ route('register') }}">📝 Register</a></li>
+                </ul>
+            </div>
+        @endguest
+        @auth
+            <div class="profile-sidebar-container">
+                <div class="left-sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="{{ route('home') }}">🏠 Home</a></li>
+                    <li><a href="{{ route('explore') }}">🔍 Explore</a></li>
+                    <li><a href="{{ route('notifications') }}">🔔 Notifications</a></li>
+                    <li><a href="{{ route('messages.showAllConversations') }}">📨 Messages</a></li>
+                    <li><a href="#">🌎 Wish List</a></li>
+                    <li><a href="{{ route('groups.showGroups') }}">👥 Groups</a></li>
+                </ul>
+                    <div class="profile-section">
+                        <!-- Profile information here -->
+                        <a href="{{ route('profile.show', auth()->id()) }}">👤 {{ auth()->user()->username }}</a>
+                    </div>
+                </div>
+            </div>
+        @endauth
+
+
+        <div class="profile-header">
+            <div class="header-container">
+                <img src="{{ asset($user->header_picture) }}" alt="Header Picture" class="profile-header-picture">
+            </div>
+            <div class="profile-container">
+                <img src="{{ asset($user->profile_picture) }}" alt="Profile Picture" class="profile-picture">
+            </div>
+            @if (auth()->check())
+            <div>
+                @if (auth()->user() == $user)
+                    <a href="{{ route('profile.edit', auth()->id()) }}" class="edit-profile-link">Edit Profile</a>
+                @else
+                    @switch($user->private_)
+                        @case(true)
+                            @if(!auth()->user()->canSendRequestTo($user->id))
+                                <a class="edit-profile-link">Already Friends</a>    
+                            @else
+                                <form method="POST" action="{{ route('request.sendFollow') }}">
+                                    @csrf
+                                    <input type="hidden" id="to" name="to" value="{{ $user->id }}"/>
+                                    <input type="hidden" id="notifType" name="notifType" value='request_follow' />
+                                    <button type="submit" class="send-friend-request-link">Send friend request</button>
+                                </form>
+                            @endif
+                        @break
+                        @case(false)
+                            @if(auth()->user()->isFollowing($user->id))
+                                <a class="edit-profile-link">Follows</a> 
+                            @else
+                                <form method="POST" action="{{ route('request.sendFollow') }}">
+                                    @csrf
+                                    <input type="hidden" id="to" name="to" value="{{ $user->id }}"/>
+                                    <input type="hidden" id="notifType" name="notifType" value='request_follow' />
+                                    <button type="submit" class="send-friend-request-link">Follow</button>
+                                </form>
+                            @endif
+                        @break
+                    @endswitch
+                @endif
+            </div>
+            @else
+                <p style="color: #D4E4F2;">.</p>
+                <p style="color: #D4E4F2;">.</p>
+            @endif
+            <div class="user-info">
+                <div>
+                    <h3>{{ $user->username }}</h3>
+                    <p>{{ $user->name_ }}</p>
+                    <p>{{ $user->description_ ? $user->description_ : 'Add description' }}</p>
+                    <p>{{ $user->location ? $user->location : 'Add location' }}</p>
+                </div>
+                <!-- Need to see if they are friends. Not implemented yet. Add this when done (    && (weAreFriends || !($user->private_)    )-->
+                <div class="user-links">
+                    @if (Auth()->user() && (Auth()->user() == $user || (Auth()->user() != $user && !($user->private_))))
+                        <div class="followers-following-link">
+                            <a href="{{ route('followers', $user->id) }}" class="followers-link">{{ $user->followers()->count() }} Followers</a>
+                            <a href="{{ route('following', $user->id) }}" class="following-link">{{ $user->following()->count() }} Following</a>
+                        </div>
+                    @else
+                        <div class="followers-following-link">
+                            <p>{{ $user->followers()->count() }} Followers {{ $user->following()->count() }} Following</p>
+                        </div>
+                    @endif
+                    @if (Auth()->user() == $user)
+                        <div>
+                            <a href="{{ route('profile.delete', $user->id) }}"  class="delete-account-link">Delete Account</a>
+                        </div> 
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-body">
+        <!-- possibility of seeing other users posts: -->
+        <!-- 1. I am seeing my personal profile -->
+        <!-- 2. I am visiting a friend's profile -->
+        <!-- 3. I am visiting a user that has a public account -->
+        <!-- Need to see if they are friends. Not implemented yet. Add this when done (    && (weAreFriends || !($user->private_)    )-->
+        @if (Auth()->user() == $user || (Auth()->user() != $user && !($user->private_)))
+            <div class="post">
+                <!-- Add user posts or a timeline here -->
+                @if ($user->posts()->count() > 0)
+                    @foreach($user->posts()->get() as $post)
+                        <div class="post-item">
+                            <div class="post-content">
+                                <img src="{{ asset('postimage/' . $post->content_) }}">
+                                <p>{{ $post->description_ }}</p>
+                            </div>
+                            <div class="post-details">
+                                @guest
+                                    <p>{{ $post->likes_ }} likes</p>
+                                    <p class="show-details">{{ $post->comments_ }} Comments</p>
+                                @else
+                                    <a href="{{ url('/posts/' . $post->postid . '/likes') }}">{{ $post->likes_ }} likes</a>
+                                    <a href="{{ url('/posts/' . $post->postid . '/comments') }}" class="show-details">{{ $post->comments_ }} Comments</a>
+                                @endguest
+                                
+                                <p> {{ \Carbon\Carbon::parse($post->time_)->diffForHumans() }}</p>
+                                <!-- If I'm on my personal profile page -->
+                                @if (Auth()->user() == $user)  
+                                    <a onclick="return confirm('Are you sure to delete this?')" href="{{url('my_posts_del', $post->postid)}}" class="btn btn-danger">Delete</a>
+                                    <a href="{{url('post_update_page',$post->postid)}}" class="btn btn-primary">Edit</a>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                    @else
+                        <div class="no-posts-message">
+                            <p>Looks like you haven't shared any posts yet. Start sharing your thoughts and experiences!</p>
+                            <img src="https://github.com/acarolinacc/teste/blob/main/DALL%C2%B7E%202023-12-21%2023.12.58%20-%20A%20vibrant%20and%20engaging%20image%20depicting%20a%20user%20starting%20to%20create%20posts%20on%20a%20social%20media%20platform%20designed%20for%20travelers.%20The%20scene%20includes%20a%20diverse.png?raw=true" alt="Start Sharing Your Experiences" style="max-width:100%; height:auto;">
+                        </div>
+                    @endif
+
+            </div>            
+        <!-- Private account -->
+        @else
+            <p>This is a private account. You don't have access to this user's posts.</p>
+        @endif    
+        
+        {{-- Right Sidebar --}}
+        <div class="profile-right-sidebars">
+            <div class="right-sidebar">
+                <div class="countries-visited">
+                    <h3>Countries visited</h3>
+                    <p> {{ $user->countries_visited }}/195 </p>
+                </div>
+            </div>
+            {{-- Right Sidebar --}}
+            <div class="right-sidebar">
+                <div class="Wish list destinations">
+                    <h3>Wish list destinations</h3>
+                    <ul>
+                        <li>Rio de Janeiro, Brasil</li>
+                        <li>Paris, França</li>
+                        <li>Mikonos, Grécia</li>
+                        <!-- Add more as saved -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="{{ url('css/profile.css') }}" rel="stylesheet">
+@endsection
