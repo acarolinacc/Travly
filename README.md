@@ -269,7 +269,7 @@ URL to the product: https://lbaw2334.lbaw.fe.up.pt
 
 ### 2. Video presentation
 
-> https://git.fe.up.pt/lbaw/lbaw2324/lbaw2334/-/blob/main/public/Docs/clideo_editor_50985c906369440d8d5c628aab3d90a7.mp4?ref_type=heads
+> clideo_editor_50985c906369440d8d5c628aab3d90a7.mp4
 
 ![Captura_de_ecrã_2023-12-22_203836](uploads/17d5aaa27ad59f61f95caa7afb2388ea/Captura_de_ecrã_2023-12-22_203836.png)
 
